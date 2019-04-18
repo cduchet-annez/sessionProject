@@ -3,36 +3,46 @@
 class SessionManager {
     private $attributs = [];
 
-    public function __construct(){//construit l'objet
-        session_start();//démarre la session
-        foreach ($_SESSION as $key => $value) {//session c'est déjà un tableau on le parcours pour récupérer
-            $this->attributs[$key] = $value;//la clé et la valeur et les mettre dans le tableau attributs
+    public function construct(){
+        // Démarre la session
+        session_start();
+        // $_SESSION est un tableau, on récupére sa clé et sa valeure pour les insérer dans le tableau $attributs
+        foreach ($_SESSION as $key => $value) {
+            $this->attributs[$key] = $value;
         }
     }
-    public function __destruct(){ //detruit mon objet
-
-        foreach($this->attributs as $key => $value){//maintenant c'est l'inverse on parcours le tableau d'attribut
-            $_SESSION[$key] = $value;//pour mettre les clé et valeurs dans le tableau session avant la destruction pour les sauvegarde
+    public function destruct(){
+        // L'inverse, on rentre dans le tableau $attributs pour mettre les clés et leurs valeurs dans le tableau $_SESSION avant sa destruction pour la sauvegarde
+        foreach($this->attributs as $key => $value){
+            $_SESSION[$key] = $value;
         }
     }
 
-    public function getAttributs(){// vu que les attributs sont privés on les recupère grace au get
-        return $this->attributs;//on les retourne dans notre tableau attributs
+    // On récupère TOUT les éléments private avec un getAttributs
+    public function getAttributs(){
+        // On retourne le tableau d'attributs
+        return $this->attributs;
     }
 
-    public function __set($name, $value){// on recupere et instancie des attributs qui n'existe pas à l'objet
-        $this->attributs[$name] = serialize($value);//on transforme notre objet en chaine de caractère
+    // Appelle quand on essaie d'assigner une variable à un attributs qui n'existe pas
+    public function set($name, $value){
+        // On transforme notre attributs en chaine de caractère grâce à serialize
+        $this->attributs[$name] = serialize($value);
     }
 
-    public function __get($name){//on appel une fonction qui n'existe pas
-        return unserialize($this->attributs[$name]);//on re transforme notre objet en objet
+    // Appelle quand on essaie de récupérer une variable à un attributs qui n'existe pas
+    public function get($name){
+        // On transforme notre chaine de caractère en objet
+        return unserialize($this->attributs[$name]);
     }
 
-    public function __isset($name){//on verifie si la variable ou un attribut existe
+    // isSet est une méthode magique qui est appelé quand on appelle la fonction php isset sur un attribut qui n'existe pas
+    public function isset($name){
         return isset($this->attributs[$name]);
     }
 
-    public function __unset($name){//on supprime la variable ou l attribut qui n'existai pas
+    // unSet est une méthode magique qui est appelé quand on appelle la fonction php unset sur un attribut qui n'existe pas
+    public function unset($name){
         unset($this->attributs[$name]);
     }
 }
