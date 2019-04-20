@@ -8,7 +8,6 @@ abstract class Voiture extends Vehicule implements VoitureInterface {
 
     public function __construct($marque, $model, $prix, $nbPortes, $clim, $siegeChauffant)
     {
-        var_dump($siegeChauffant);
         parent::__construct($marque, $model, $prix);
         $this->nbPortes = $nbPortes;
         $this->clim = $clim;

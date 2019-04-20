@@ -3,7 +3,7 @@ class Connect
 {
     private $bdd;
 
-    public function __construct($connec_host = 'localhost', $connec_dbname = 'carsProject', $connec_pseudo = 'root', $connec_mdp = '')
+    public function __construct($connec_host = 'db', $port = '3306', $connec_dbname = 'carsProject', $connec_pseudo = 'user', $connec_mdp = 'root')
     {
         try {
             $this->bdd = new PDO('mysql:host='.$connec_host.';dbname='.$connec_dbname, $connec_pseudo, $connec_mdp);
@@ -12,7 +12,7 @@ class Connect
             $this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         catch(PDOException $e) {
-            throw new Exception($e->getMessage());
+            return $e;
         }
     }
 

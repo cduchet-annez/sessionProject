@@ -16,13 +16,8 @@ var_dump($sess);
 $audiA4 = new Audi('A4', 5000, 5, true, false, true);
 $kawa = new moto('kawasaki','vds', 15000, 5, true);
 $audiA4->persist();
-$audiA4->setId($audiA4->getId());
-$audiA1 = new Audi('A1', 25000, 3, true, false, true);
-$audiA1->persist();
-$audiA1->setId($audiA4->getId());
-$audiA4->setClim(false);
-$audiA4->modify();
-$audiA4->erase();
+
+
 var_dump($audiA4);
 //serialize transforme en string un objet
 //ça sert surtout pour la sauvegarde et l'echange !
