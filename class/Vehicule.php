@@ -5,12 +5,30 @@ abstract class Vehicule implements VehiculeInterface
     protected $marque;
     protected $model;
     protected $prix;
+    protected $id;
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     public function __construct($marque, $model, $prix)
     {
         $this->marque = $marque;
         $this->model = $model;
         $this->prix = $prix;
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function __set($name, $value) {

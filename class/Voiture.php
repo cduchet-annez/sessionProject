@@ -8,11 +8,25 @@ abstract class Voiture extends Vehicule implements VoitureInterface {
 
     public function __construct($marque, $model, $prix, $nbPortes, $clim, $siegeChauffant)
     {
+        var_dump($siegeChauffant);
         parent::__construct($marque, $model, $prix);
         $this->nbPortes = $nbPortes;
         $this->clim = $clim;
         $this->siegeChauffant = $siegeChauffant;
 
+    }
+    public function persist(){
+        $voitureManager = new VoitureManager();
+
+        $voitureManager->insert($this);
+    }
+    public function erase(){
+        $voitureManager = new VoitureManager();
+        $voitureManager->delete($this);
+    }
+    public function modify(){
+        $voitureManager = new VoitureManager();
+        $voitureManager->update($this);
     }
      // le set essaye d'affecter une valeur et vérifie si elle est privé ou pas 
     public function __set($name, $value) {
