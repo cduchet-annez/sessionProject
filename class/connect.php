@@ -3,7 +3,7 @@ class Connect
 {
     private $bdd;
 
-    public function __construct($connec_host = 'db', $port = '3306', $connec_dbname = 'carsProject', $connec_pseudo = 'user', $connec_mdp = 'root')
+    public function __construct($connec_host = 'localhost', $port = '3306', $connec_dbname = 'carsProject', $connec_pseudo = 'root', $connec_mdp = '')
     {
         try {
             $this->bdd = new PDO('mysql:host='.$connec_host.';dbname='.$connec_dbname, $connec_pseudo, $connec_mdp);
@@ -21,10 +21,13 @@ class Connect
         try{
             $query = $this->bdd->prepare($request);
             $query->execute();
+            return $this->bdd->lastInsertId();
         } catch (Exception $e){
             throw new Exception($e->getMessage());
         }
 
     }
 }
+
+
 ?>

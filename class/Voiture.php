@@ -5,14 +5,31 @@ abstract class Voiture extends Vehicule implements VoitureInterface {
     private $nbPortes;
     protected $clim;
     protected $siegeChauffant;
+    protected $id;
 
-    public function __construct($marque, $model, $prix, $nbPortes, $clim, $siegeChauffant)
+    public function __construct($marque, $model, $prix, $nbPortes, $clim, $siegeChauffant, $id)
     {
         parent::__construct($marque, $model, $prix);
         $this->nbPortes = $nbPortes;
         $this->clim = $clim;
         $this->siegeChauffant = $siegeChauffant;
+        $this->id = $id;
 
+    }
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
     public function persist(){
         $voitureManager = new VoitureManager();

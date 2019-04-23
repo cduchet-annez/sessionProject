@@ -1,5 +1,5 @@
 <?php
-
+include './function.php';
 include './interface/vehiculeinterface.php';
 include './interface/voitureinterface.php';
 include './interface/motointerface.php';
